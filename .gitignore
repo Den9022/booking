@@ -1,0 +1,9 @@
+logs
+*.log
+npm-debug.log*
+
+build/Release
+**/node_modules
+**/dist
+
+**/package-lock.json
