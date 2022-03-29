@@ -5,6 +5,8 @@ import { UsersService } from 'src/users/user.service';
 
 @Injectable()
 export class AuthService {
+  public loggedInUser: number;
+
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
@@ -31,7 +33,7 @@ export class AuthService {
     if (user == null) {
       throw new Error('Invalid User');
     }
-
+    this.loggedInUser = user.id;
     return {
       access_token: this.jwtService.sign({
         sub: user.id,

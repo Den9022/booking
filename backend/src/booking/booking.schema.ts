@@ -11,10 +11,10 @@ export const BookingSchema = new EntitySchema<Booking>({
       generated: true,
     },
     from: {
-      type: String,
+      type: Date,
     },
     to: {
-      type: String,
+      type: Date,
     },
     booking_price: {
       type: Number,

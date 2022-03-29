@@ -10,7 +10,7 @@ export class HotelService {
     private hotelRepository = getRepository(Hotel),
   ) {}
 
-  findAll(): Promise<Hotel[]> {
+  list(): Promise<Hotel[]> {
     return this.hotelRepository.find();
   }
 

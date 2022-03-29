@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, IsNull } from 'typeorm';
 import { Room } from './room.entity';
-
 @Injectable()
 export class RoomsService {
   constructor(
@@ -10,17 +9,32 @@ export class RoomsService {
     private roomsRepository: Repository<Room>,
   ) {}
 
-  async list(): Promise<Room[]> {
+  async list(from, to): Promise<Room[]> {
     const rooms = await this.roomsRepository.find({
-      where: [{ occupied_from: IsNull() }],
+      where: {
+        available: true,
+      },
     });
 
-    const roomVOs: Room[] = [];
+    from = new Date(from);
+    to = new Date(to);
+    const Difference_In_Time = to.getTime() - from.getTime();
+    const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
-    return roomVOs;
+    rooms.map((room) => {
+      room.price = room.price * Difference_In_Days;
+      return room;
+    });
+    return rooms;
   }
 
-  findOne(id: string): Promise<Room> {
+  findOne(id: string | number): Promise<Room> {
     return this.roomsRepository.findOne(id);
+  }
+
+  setUnavailable(id: string | number) {
+    this.roomsRepository.update(id, {
+      ...{ available: false },
+    });
   }
 }

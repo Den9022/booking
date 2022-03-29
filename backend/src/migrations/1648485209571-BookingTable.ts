@@ -20,12 +20,12 @@ export class BookingTable1648485209571 implements MigrationInterface {
           },
           {
             name: 'from',
-            type: 'varchar',
+            type: 'date',
             isNullable: false,
           },
           {
             name: 'to',
-            type: 'varchar',
+            type: 'date',
             isNullable: false,
           },
           {
@@ -45,6 +45,7 @@ export class BookingTable1648485209571 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`DROP TABLE "booking"`);
     return;
   }
 }

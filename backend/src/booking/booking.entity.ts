@@ -19,12 +19,12 @@ export class Booking extends BaseEntity {
   booking_price: number;
 
   @Column()
-  @IsString()
-  from: string;
+  @IsDate()
+  from: Date;
 
   @Column()
-  @IsString()
-  to: string;
+  @IsDate()
+  to: Date;
 
   @OneToOne(() => Room)
   @JoinColumn()

@@ -13,13 +13,19 @@ export const RoomSchema = new EntitySchema<Room>({
     price: {
       type: Number,
     },
+    available: {
+      type: Boolean,
+    },
+    hotel: {
+      type: Number,
+    },
   },
   relations: {
     hotel: {
       type: 'many-to-one',
       target: 'Hotel',
       joinColumn: {
-        name: 'hotelId',
+        name: 'hotel',
       },
     },
   },
