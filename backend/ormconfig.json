@@ -6,5 +6,10 @@
   "password": "rootpassword",
   "database": "booking",
   "entities": ["dist/**/*.entity{.ts,.js}"],
-  "synchronize": true
+  "migrations": ["dist/migrations/*.js"],
+  "migrationsTableName": "migrations",
+  "cli": {
+    "migrationsDir": "src/migrations"
+  },
+  "synchronize": false
 }

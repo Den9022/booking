@@ -7,8 +7,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { MinLength, IsNumber, IsDate, IsString } from 'class-validator';
-import { User } from 'src/users/user.entity';
-import { Room } from 'src/rooms/room.entity';
+import { User } from '../users/user.entity';
+import { Room } from '../rooms/room.entity';
 @Entity()
 export class Booking extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -26,11 +26,11 @@ export class Booking extends BaseEntity {
   @IsString()
   to: string;
 
-  @OneToOne(() => Room, (room) => room.booking)
+  @OneToOne(() => Room)
   @JoinColumn()
   room: Room;
 
-  @OneToOne(() => User, (user) => user.booking)
+  @OneToOne(() => User)
   @JoinColumn()
   user: User;
 }

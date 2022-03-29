@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import { Room } from 'src/rooms/room.entity';
+import { Room } from '../rooms/room.entity';
 
 @Entity()
 export class Hotel extends BaseEntity {

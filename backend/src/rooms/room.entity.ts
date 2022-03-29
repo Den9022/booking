@@ -3,12 +3,12 @@ import {
   Column,
   Entity,
   ManyToOne,
-  OneToOne,
+  JoinColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { MinLength, IsNumber } from 'class-validator';
-import { Hotel } from 'src/hotels/hotel.entity';
-import { Booking } from 'src/booking/booking.entity';
+import { Hotel } from '../hotels/hotel.entity';
+import { Booking } from '../booking/booking.entity';
 @Entity()
 export class Room extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -19,9 +19,7 @@ export class Room extends BaseEntity {
   @IsNumber()
   price: number;
 
-  @OneToOne(() => Booking, (booking) => booking.room)
-  booking: Booking;
-
   @ManyToOne(() => Hotel, (hotel) => hotel.rooms)
+  @JoinColumn({ name: 'hotelId', referencedColumnName: 'id' })
   hotel: Hotel;
 }

@@ -6,7 +6,7 @@ import {
   OneToOne,
 } from 'typeorm';
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import { Booking } from 'src/booking/booking.entity';
+import { Booking } from '../booking/booking.entity';
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -23,7 +23,4 @@ export class User extends BaseEntity {
   @MaxLength(150)
   @IsString()
   password: string;
-
-  @OneToOne(() => Booking, (booking) => booking.user)
-  booking: Booking;
 }
