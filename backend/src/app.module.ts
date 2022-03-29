@@ -12,9 +12,11 @@ import { UserController } from './users/user.controller';
 import { AuthModule } from './auth/auth.module';
 import { BookingModule } from './booking/booking.module';
 import { BookingController } from './booking/booking.controller';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     UsersModule,
     RoomsModule,
     HotelssModule,

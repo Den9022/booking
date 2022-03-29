@@ -14,13 +14,13 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: string): Promise<User> {
+  findOne(id: number | string): Promise<User> {
     return this.usersRepository.findOne(id);
   }
 
-  findByEmailAndPassword(email: string, password: string): Promise<User> {
+  findByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne({
-      where: { email: email, password: password },
+      where: { email: email },
     });
   }
 }
