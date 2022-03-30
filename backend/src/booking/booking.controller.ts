@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Param,
   ParseIntPipe,
   Post,
@@ -15,8 +16,12 @@ import { BookingService } from './booking.service';
 export class BookingController {
   constructor(private readonly bookingService: BookingService) {}
 
+  @Get('list')
+  findAll() {
+    return this.bookingService.findAll();
+  }
   @Post()
-  async create(@Body() booking: Booking) {
+  async create(@Body() booking: Partial<Booking>) {
     return await this.bookingService.createBooking(booking);
   }
   @Delete(':id')

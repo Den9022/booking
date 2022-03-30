@@ -6,9 +6,8 @@ import {
   JoinColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { MinLength, IsNumber } from 'class-validator';
+import { MinLength, IsNumber, IsBoolean } from 'class-validator';
 import { Hotel } from '../hotels/hotel.entity';
-import { Booking } from '../booking/booking.entity';
 @Entity()
 export class Room extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -19,7 +18,12 @@ export class Room extends BaseEntity {
   @IsNumber()
   price: number;
 
+  @Column()
+  @IsBoolean()
+  available: boolean;
+
   @ManyToOne(() => Hotel, (hotel) => hotel.rooms)
-  @JoinColumn({ name: 'hotelId', referencedColumnName: 'id' })
-  hotel: Hotel;
+  @JoinColumn([{ name: 'hotel', referencedColumnName: 'id' }])
+  @Column()
+  hotel: number;
 }
