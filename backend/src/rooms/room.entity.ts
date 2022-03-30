@@ -5,9 +5,11 @@ import {
   ManyToOne,
   JoinColumn,
   PrimaryGeneratedColumn,
+  OneToOne,
 } from 'typeorm';
 import { MinLength, IsNumber, IsBoolean } from 'class-validator';
 import { Hotel } from '../hotels/hotel.entity';
+import { Booking } from 'src/booking/booking.entity';
 @Entity()
 export class Room extends BaseEntity {
   @PrimaryGeneratedColumn()

@@ -2,11 +2,12 @@ import {
   BaseEntity,
   Column,
   Entity,
-  PrimaryGeneratedColumn,
+  JoinColumn,
   OneToOne,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import { Booking } from '../booking/booking.entity';
+import { Booking } from 'src/booking/booking.entity';
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()

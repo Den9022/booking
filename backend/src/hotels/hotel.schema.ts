@@ -21,6 +21,9 @@ export const HotelSchema = new EntitySchema<Hotel>({
     rooms: {
       type: 'one-to-many',
       target: 'Room',
+      joinColumn: {
+        name: 'room',
+      },
     },
   },
 });

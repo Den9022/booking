@@ -18,12 +18,13 @@ export class BookingService {
   findAll(): Promise<Booking[]> {
     return this.bookingRepository.find();
   }
-  removeBooking(bookingId) {
+  removeBooking(bookingId: string | number) {
     this.bookingRepository.delete(bookingId);
   }
 
   async createBooking(booking: Partial<Booking>) {
-    const room = await this.roomService.findOne(booking.room.id);
+    const room = await this.roomService.findOne(booking.room);
+    const user = await this.userService.findOne(this.authService.loggedInUser);
     const newBooking = new Booking();
     const from = new Date(booking.from);
     const to = new Date(booking.to);
@@ -33,10 +34,8 @@ export class BookingService {
     newBooking.booking_price = room.price * Difference_In_Days;
     newBooking.from = from;
     newBooking.to = to;
-    newBooking.room = room;
-    newBooking.user = await this.userService.findOne(
-      this.authService.loggedInUser,
-    );
+    newBooking.room = room.id;
+    newBooking.user = user.id;
 
     this.roomService.setUnavailable(room.id);
 

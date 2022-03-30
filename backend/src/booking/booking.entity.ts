@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
 } from 'typeorm';
-import { MinLength, IsNumber, IsDate, IsString } from 'class-validator';
+import { IsNumber, IsDate } from 'class-validator';
 import { User } from '../users/user.entity';
 import { Room } from '../rooms/room.entity';
 @Entity()
@@ -26,11 +26,13 @@ export class Booking extends BaseEntity {
   @IsDate()
   to: Date;
 
-  @OneToOne(() => Room)
-  @JoinColumn()
-  room: Room;
+  @OneToOne(() => Room, (room) => room.id)
+  @JoinColumn([{ name: 'room', referencedColumnName: 'id' }])
+  @Column()
+  room: number;
 
-  @OneToOne(() => User)
-  @JoinColumn()
-  user: User;
+  @OneToOne(() => User, (user) => user.id)
+  @JoinColumn([{ name: 'user', referencedColumnName: 'id' }])
+  @Column()
+  user: number;
 }
